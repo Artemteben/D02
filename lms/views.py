@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404
-from django.utils.timezone import now, timedelta
 from rest_framework import viewsets
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import (
@@ -15,7 +14,7 @@ from .models import Course, Subscription
 from .models import Lesson
 from .paginators import CustomPagination
 from .serializers import CourseSerializer, LessonSerializer
-from .tasks import send_course_update_email, notify_subscribers_about_updating_course
+from .tasks import notify_subscribers_about_updating_course
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -42,7 +41,7 @@ class CourseCreateAPIView(CreateAPIView):
         serializer.save(owner=self.request.user)
 
 
-class CourseViewSet(viewsets.ModelViewSet):
+class CourseViewSet1(viewsets.ModelViewSet):
     """
     CRUD операции для курсов с проверкой прав.
     """

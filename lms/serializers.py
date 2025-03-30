@@ -19,13 +19,22 @@ class CourseSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source="owner.username")  # Отображение владельца
     lesson_count = serializers.SerializerMethodField()  # Подсчет уроков
     lessons = LessonSerializer(
-        many=True, read_only=True,
+        many=True,
+        read_only=True,
     )  # Правка
     is_subscribed = serializers.SerializerMethodField()  # Проверка подписки
 
     class Meta:
         model = Course
-        fields = ["id", "preview", "description", "lesson_count", "lessons", "owner", "is_subscribed"]
+        fields = [
+            "id",
+            "preview",
+            "description",
+            "lesson_count",
+            "lessons",
+            "owner",
+            "is_subscribed",
+        ]
         read_only_fields = ["owner"]  # Поле `owner` только для чтения
         is_subscribed = serializers.SerializerMethodField()
 

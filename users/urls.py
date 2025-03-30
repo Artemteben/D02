@@ -1,6 +1,12 @@
 # users/urls.py
 from django.urls import path, include
-from .views import UserViewSet, RegisterView, TokenView, PaymentViewSet, StripePaymentView
+from .views import (
+    UserViewSet,
+    RegisterView,
+    TokenView,
+    PaymentViewSet,
+    StripePaymentView,
+)
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework.routers import DefaultRouter
 
@@ -15,5 +21,5 @@ urlpatterns = [
     path("token/", TokenView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("", include(router.urls)),
-    path('stripe-payment/', StripePaymentView.as_view(), name='stripe_payment'),
+    path("stripe-payment/", StripePaymentView.as_view(), name="stripe_payment"),
 ]
