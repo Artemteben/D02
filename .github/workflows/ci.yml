@@ -91,9 +91,9 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY}}
-          DB_NAME: DRF3
-          DB_USER: postgres
-          DB_PASSWORD: Aa19951970a
+          NAME: DRF3
+          USER: postgres
+          PASSWORD: Aa19951970a
           HOST: localhost
           PORT: 5432
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/DRF3
