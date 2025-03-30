@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "1"
+name = "DRF1"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
+package-mode = false  # Перенесено в правильный раздел
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -11,7 +12,15 @@ django = "^5.1.7"
 celery = "^5.4.0"
 python-decouple = "^3.8"
 pandas = "^2.2.3"
-
+djangorestframework = "^3.16.0"
+djangorestframework-simplejwt = "^5.5.0"
+drf-yasg = "^1.21.10"
+django-celery-beat = "^2.7.0"
+psycopg2 = "^2.9.10"
+drf-spectacular = "^0.28.0"
+stripe = "^11.6.0"
+django-filter = "^25.1"
+pillow = "^11.1.0"
 
 [build-system]
 requires = ["poetry-core"]
