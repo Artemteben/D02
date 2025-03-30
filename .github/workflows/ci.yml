@@ -91,11 +91,11 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY}}
-          NAME: DRF3
-          USER: postgres
-          PASSWORD: Aa19951970a
-          HOST: localhost
-          PORT: 5432
+          NAME: ${{ secrets.NAME}}
+          USER: ${{ secrets.USER}}
+          PASSWORD: ${{ secrets.PASSWORD}}
+          HOST: ${{ secrets.HOST}}
+          PORT: ${{ secrets.PORT}}
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/DRF3
           REDIS_HOST: redis://localhost:6379/0
           CELERY_BROKER_URL: redis://localhost:6379
