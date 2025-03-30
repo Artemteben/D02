@@ -31,7 +31,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: Aa19951970a
-          POSTGRES_DB: DRF3
+          POSTGRES_DB: localhost
         ports:
           - 5432:5432
 
@@ -142,7 +142,7 @@ jobs:
             sudo docker compose down 
             cd ..
             sudo rm -rf ${{ secrets.DEPLOY_DIR }}
-            git clone https://github.com/Artemteben/Docker2.git          
+            git clone https://github.com/Artemteben/Doc2.git          
             cd ${{ secrets.DEPLOY_DIR }}  
             cp ../.env .env 
             sudo docker compose up -d --build
