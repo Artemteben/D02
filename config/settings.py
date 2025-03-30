@@ -6,7 +6,7 @@ from decouple import config, Csv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Загружаем секретные ключи и настройки из .env
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY", default="your-default-secret-key")
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*", cast=Csv())
@@ -61,11 +61,11 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": config("NAME"),
-        "USER": config("USER"),
-        "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST", default="localhost"),  # Если не указано, по умолчанию будет localhost
-        "PORT": config("PORT", default="5432"),  # Если не указано, по умолчанию будет 5432
+        "NAME": config("NAME", default="postgres"),
+        "USER": config("USER", default="postgres"),
+        "PASSWORD": config("PASSWORD", default="password"),
+        "HOST": config("HOST", default="localhost"),
+        "PORT": config("PORT", default="5432"),
     }
 }
 
@@ -83,9 +83,9 @@ USE_I18N = True
 USE_TZ = True
 
 # Static and Media Files
-STATIC_URL = "static/"
-MEDIA_URL = "media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -106,13 +106,12 @@ SPECTACULAR_SETTINGS = {
 }
 
 # Stripe configuration
-STRIPE_API_KEY = config("STRIPE_API_KEY")
-STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
-STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
+STRIPE_API_KEY = config("STRIPE_API_KEY", default="")
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
+STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY", default="")
 
 # Celery configuration
 CELERY_BROKER_URL = config("REDIS_URL", default="redis://localhost:6379/0")
-CELERY_BROKER_BACKEND = config("REDIS_URL", default="redis://localhost:6379/0")
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_TIMEZONE = "Europe/Moscow"
@@ -120,6 +119,6 @@ CELERY_TIMEZONE = "Europe/Moscow"
 CELERY_BEAT_SCHEDULE = {
     "deactivate_inactive_users": {
         "task": "users.tasks.deactivate_inactive_users",
-        "schedule": crontab(hour=0, minute=0),  # Каждые полночь
+        "schedule": crontab(hour=0, minute=0),  # Каждый день в полночь
     },
 }
