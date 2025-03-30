@@ -30,8 +30,8 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_db
+          POSTGRES_PASSWORD: Aa19951970a
+          POSTGRES_DB: DRF3
         ports:
           - 5432:5432
 
@@ -56,7 +56,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.13'
 
       - name: Install dependencies
         run: |
@@ -100,7 +100,7 @@ jobs:
           REDIS_HOST: redis://localhost:6379/0
           CELERY_BROKER_URL: redis://localhost:6379
           CELERY_RESULT_BACKEND: redis://localhost:6379
-        run: python manage.py test
+        run: poetry run python manage.py test
 
   build:
     runs-on: ubuntu-latest
