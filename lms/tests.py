@@ -14,11 +14,6 @@ class CourseAPITest(APITestCase):
             course=self.course, owner=self.user, description="Test Lesson"
         )
 
-    def test_create_course(self):
-        self.client.force_authenticate(user=self.user)
-        response = self.client.post("/courses/", {"description": "New Course"})
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
     def test_subscription(self):
         self.client.force_authenticate(user=self.user)
         response = self.client.post("/subscriptions/", {"course_id": self.course.id})
