@@ -78,7 +78,7 @@ jobs:
           HOST: localhost
           PORT: 5432
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/
-        run: run python manage.py migrate
+        run: poetry run python manage.py migrate
 
       - name: Wait for Redis
         run: |
