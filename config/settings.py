@@ -64,11 +64,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "POSTGRES_DB": config("POSTGRES_DB"),
+        "NAME": config("POSTGRES_DB"),
         "USER": config("USER"),
         "PASSWORD": config("PASSWORD"),
         "HOST": config("HOST"),
         "PORT": config("PORT"),
+        "STRIPE_SECRET_KEY": config("STRIPE_SECRET_KEY"),
     }
 }
 
@@ -127,7 +128,6 @@ SPECTACULAR_SETTINGS = {
 }
 
 STRIPE_API_KEY = config("STRIPE_API_KEY")
-
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 STRIPE_PUBLIC_KEY = config("STRIPE_PUBLIC_KEY")
 
