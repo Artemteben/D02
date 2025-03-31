@@ -29,8 +29,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: Aa19951970a
+          USER: postgres
+          PASSWORD: Aa19951970a
           POSTGRES_DB: DRF3
         ports:
           - 5432:5432
