@@ -61,14 +61,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry && poetry config virtualenvs.create false &&  poetry install --no-root
-
-
-      - name: Wait for PostgreSQL
-        run: |
-          until pg_isready -h localhost -p 5432; do
-            echo "Waiting for PostgreSQL..."
-            sleep 1
-          done
+          
+          
+          #- name: Wait for PostgreSQL
+          #run: |
+          #until pg_isready -h localhost -p 5432; do
+          #echo "Waiting for PostgreSQL..."
+        ##done
 
       - name: Run migrations
         env:
@@ -90,7 +89,7 @@ jobs:
 
       - name: Run tests
         env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           NAME: ${{ secrets.POSTGRES_DB }}
           USER: ${{ secrets.USER }}
           PASSWORD: ${{ secrets.PASSWORD }}
