@@ -142,7 +142,7 @@ jobs:
             sudo docker compose down 
             cd ..
             sudo rm -rf ${{ secrets.DEPLOY_DIR }}
-            git clone https://github.com/Artemteben/Doc2.git          
+            git clone https://github.com/Artemteben/D02.git          
             cd ${{ secrets.DEPLOY_DIR }}  
             cp ../.env .env 
             sudo docker compose up -d --build
