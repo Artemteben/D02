@@ -29,8 +29,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: Aa19951970a
+          USER: postgres
+          PASSWORD: Aa19951970a
           POSTGRES_DB: DRF3
         ports:
           - 5432:5432
@@ -39,9 +39,9 @@ jobs:
         image: redis
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY}}
-          DB_NAME: DRF3
-          DB_USER: postgres
-          DB_PASSWORD: Aa19951970a
+          POSTGRES_DB: DRF3
+          USER: postgres
+          PASSWORD: Aa19951970a
           HOST: localhost
           PORT: 5432
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/DRF3
@@ -73,13 +73,13 @@ jobs:
       - name: Run migrations
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY}}
-          DB_NAME: DRF3
-          DB_USER: postgres
-          DB_PASSWORD: Aa19951970a
+          POSTGRES_DB: DRF3
+          USER: postgres
+          PASSWORD: Aa19951970a
           HOST: localhost
           PORT: 5432
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/DRF3
-        run: poetry run python manage.py migrate
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/
+        run: run python manage.py migrate
 
       - name: Wait for Redis
         run: |
