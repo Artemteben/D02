@@ -67,9 +67,8 @@ DATABASES = {
         "NAME": config("POSTGRES_DB"),
         "USER": config("USER"),
         "PASSWORD": config("PASSWORD"),
-        "HOST": config("HOST"),
+        "HOST": config("HOST", "db"),
         "PORT": config("PORT"),
-        "STRIPE_SECRET_KEY": config("STRIPE_SECRET_KEY"),
     }
 }
 
