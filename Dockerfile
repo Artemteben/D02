@@ -1,21 +1,25 @@
 FROM python:3.12-slim
 
-
-# Установить зависимости Python
 WORKDIR /app
 
-RUN apt-get update \\
-  && apt-get install -y gcc libpg-dev \\
-  && apt-get clean \\
-  && rm -rf /var/lib/apt/lists/\*
+RUN apt-get update \
+    && apt-get install -y gcc libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY /requirements.txt /
+RUN pip install "poetry==1.8.2"
 
-RUN pip install -r /requirements.txt --no-cache-dir
+COPY pyproject.toml poetry.lock /app/
 
-# Скопировать исходный код
-COPY . .
+RUN poetry config virtualenvs.create false && \
+    poetry install --no-interaction --no-ansi  --only main
+
+COPY . /app
+
+RUN mkdir -p /app/media
 
 EXPOSE 8000
 
-#CMD ("sh", "-c","python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000")
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py collectstatic --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:8000"]

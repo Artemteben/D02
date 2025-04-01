@@ -8,7 +8,7 @@ services:
              gunicorn config.wsgi:application --bind 0.0.0.0:8000"
 
     environment:
-      - HOST=db
+      - POSTGRES_HOST=db
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
